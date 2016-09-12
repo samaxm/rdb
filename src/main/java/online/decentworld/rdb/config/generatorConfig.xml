@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry location="F:/Sam/lib/mysql-connector-java-5.1.6.jar" />
+
+	<context id="mysql" targetRuntime="MyBatis3">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/world" userId="root"
+			password="123456">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="online.decentworld.rdb.entity"
+			targetProject="E:\decentworld\rdb\src\main\java">
+			<property name="enableSubPackages" value="false" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="online.decentworld.rdb.mapper"
+			targetProject="E:\decentworld\rdb\src\main\java">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- 生成的Dao接口 的包路径 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="online.decentworld.rdb.mapper"
+			targetProject="E:\decentworld\rdb\src\main\java">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		
+		<table tableName="t_id" domainObjectName="ID"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> 
+		
+		
+<!-- 		<table tableName="t_phonenum_record" domainObjectName="PhoneNumRecord"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> -->
+
+		<!-- <table tableName="t_jokes" domainObjectName="Joke"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> -->
+		
+<!-- 		<table tableName="t_advice" domainObjectName="CustomAdvice"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> -->
+	</context>
+</generatorConfiguration>
