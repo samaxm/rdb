@@ -55,4 +55,7 @@ public interface UserMapper {
     String getUserPassword(String dwID);
     
     User selectByUnionid(String unionid);
+
+    User selectByPhoneNum(String phoneNum);
+
 }

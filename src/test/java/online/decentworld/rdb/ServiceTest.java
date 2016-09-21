@@ -1,21 +1,14 @@
 package online.decentworld.rdb;
 
 import online.decentworld.rdb.config.DBConfig;
-import online.decentworld.rdb.entity.AppVersion;
-import online.decentworld.rdb.entity.DBChargeResult;
-import online.decentworld.rdb.entity.ID;
-import online.decentworld.rdb.entity.Wealth;
-import online.decentworld.rdb.mapper.AppVersionMapper;
-import online.decentworld.rdb.mapper.IDMapper;
-import online.decentworld.rdb.mapper.WealthMapper;
-
+import online.decentworld.rdb.entity.User;
+import online.decentworld.rdb.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.HashMap;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,10 +16,18 @@ import java.util.HashMap;
 public class ServiceTest {
 
 	@Autowired
-	private IDMapper mapper;
+	private UserMapper mapper;
+	@Autowired
+	private DataSourceTransactionManager tx;
+
 
 	@Test
 	public void test() throws InterruptedException {
+		User user=mapper.selectByPhoneNum("123");
+		System.out.println(user.getName());
+//		mapper.updateTest("123");
+
+
 //		ID id=mapper.getChatID();
 //		System.out.println(id.getChatIdRoof());
 //		mapper.updateChatID(1000);
@@ -47,7 +48,7 @@ public class ServiceTest {
 //			}).start();
 //
 //		}
-//		Thread.currentThread().sleep(20000);
+//		Thread.currentThread().sleep(60000);
 
 	}
 }

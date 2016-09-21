@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -106,6 +108,9 @@ public class DBConfig {
 		mapper.setSqlSessionFactory(bean.getObject());
 		return mapper;
 	}
+
+
+
 	
 	/**
 	 * SqlSessionFacory config
@@ -138,9 +143,12 @@ public class DBConfig {
 		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
 		Properties p=new Properties();
 		try {
-			p.load(DBConfig.class.getClassLoader().getResourceAsStream("dataSource.properties"));
-		} catch (IOException e) {
-			e.printStackTrace();
+			String daPath=DBConfig.class.getClassLoader().getResource("dataSource.properties").getPath();
+			logger.info("[ENVIRONMENT] #"+daPath);
+			File f=new File(daPath);
+			p.load(new FileInputStream(f));
+		} catch (Exception e) {
+			logger.warn("",e);
 		}
 
 		String ENVIORMENT=p.getProperty("ENVIORMENT");
