@@ -266,4 +266,11 @@
       type = #{type,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <update id="resetPassword" parameterType="java.lang.String">
+    update user
+    set
+    password = #{password,jdbcType=VARCHAR}
+    where phone = #{phone,jdbcType=VARCHAR}
+  </update>
 </mapper>

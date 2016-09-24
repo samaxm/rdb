@@ -100,7 +100,25 @@ public class DBConfig {
 		mapper.setSqlSessionFactory(bean.getObject());
 		return mapper;
 	}
-	
+
+
+	@Bean
+	public MapperFactoryBean<ConsumePriceMapper> getConsumePriceMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<ConsumePriceMapper> mapper=new MapperFactoryBean<ConsumePriceMapper>();
+		mapper.setMapperInterface(ConsumePriceMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+
+	@Bean
+	public MapperFactoryBean<OrderMapper> getOrderMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<OrderMapper> mapper=new MapperFactoryBean<OrderMapper>();
+		mapper.setMapperInterface(OrderMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+
+
 	@Bean
 	public MapperFactoryBean<ReportRecordMapper> getReportRecord(SqlSessionFactoryBean bean) throws Exception{
 		MapperFactoryBean<ReportRecordMapper> mapper=new MapperFactoryBean<ReportRecordMapper>();

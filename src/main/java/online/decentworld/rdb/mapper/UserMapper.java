@@ -1,6 +1,7 @@
 package online.decentworld.rdb.mapper;
 
 import online.decentworld.rdb.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     /**
@@ -57,5 +58,7 @@ public interface UserMapper {
     User selectByUnionid(String unionid);
 
     User selectByPhoneNum(String phoneNum);
+
+    int resetPassword(@Param("phone") String phone,@Param("password") String password);
 
 }

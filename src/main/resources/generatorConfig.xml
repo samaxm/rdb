@@ -33,7 +33,7 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		
-		<table tableName="t_version" domainObjectName="AppVersion"
+		<table tableName="t_price" domainObjectName="ConsumePrice"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
