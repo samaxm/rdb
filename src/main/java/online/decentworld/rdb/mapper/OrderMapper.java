@@ -50,4 +50,7 @@ public interface OrderMapper {
      * @mbggenerated Sat Sep 24 17:53:19 CST 2016
      */
     int updateByPrimaryKey(Order record);
+
+    void updateStatus(String orderNum,boolean status);
+
 }

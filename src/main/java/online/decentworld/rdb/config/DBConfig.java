@@ -13,10 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
 
 
 /**
@@ -52,6 +49,23 @@ public class DBConfig {
 		mapper.setSqlSessionFactory(bean.getObject());
 		return mapper;
 	}
+
+	@Bean
+	public MapperFactoryBean<StrangerContactMapper> getStrangerContactMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<StrangerContactMapper> mapper=new MapperFactoryBean<StrangerContactMapper>();
+		mapper.setMapperInterface(StrangerContactMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+	@Bean
+	public MapperFactoryBean<FriendContactMapper> getFriendContactMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<FriendContactMapper> mapper=new MapperFactoryBean<FriendContactMapper>();
+		mapper.setMapperInterface(FriendContactMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+
+
 
 	@Bean
 	public MapperFactoryBean<IDMapper> getIDMapper(SqlSessionFactoryBean bean) throws Exception{
@@ -118,6 +132,15 @@ public class DBConfig {
 		return mapper;
 	}
 
+	@Bean
+	public MapperFactoryBean<PayPasswordMapper> getPayPasswordMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<PayPasswordMapper> mapper=new MapperFactoryBean<PayPasswordMapper>();
+		mapper.setMapperInterface(PayPasswordMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+
+
 
 	@Bean
 	public MapperFactoryBean<ReportRecordMapper> getReportRecord(SqlSessionFactoryBean bean) throws Exception{
@@ -159,18 +182,19 @@ public class DBConfig {
 		path=path.replace("file","classloader");
 		logger.info("[C3P0_CONFIG_PATH] #"+path);
 		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
-		Properties p=new Properties();
-		try {
-			String daPath=DBConfig.class.getClassLoader().getResource("dataSource.properties").getPath();
-			logger.info("[ENVIRONMENT] #"+daPath);
-			File f=new File(daPath);
-			p.load(new FileInputStream(f));
-		} catch (Exception e) {
-			logger.warn("",e);
-		}
-
-		String ENVIORMENT=p.getProperty("ENVIORMENT");
-		ComboPooledDataSource cpds = new ComboPooledDataSource(ENVIORMENT);
+//		Properties p=new Properties();
+//		try {
+//			String daPath=DBConfig.class.getClassLoader().getResource("dataSource.properties").getPath();
+//			logger.info("[ENVIRONMENT] #"+daPath);
+//			File f=new File(daPath);
+//			p.load(new FileInputStream(f));
+//		} catch (Exception e) {
+//			logger.warn("",e);
+//		}
+//
+//		String ENVIORMENT=p.getProperty("ENVIORMENT");
+//		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
+				ComboPooledDataSource cpds = new ComboPooledDataSource("LOCAL");
 		return cpds;
 	}
 	

@@ -2,6 +2,8 @@ package online.decentworld.rdb;
 
 import online.decentworld.rdb.config.DBConfig;
 import online.decentworld.rdb.entity.User;
+import online.decentworld.rdb.mapper.FriendContactMapper;
+import online.decentworld.rdb.mapper.StrangerContactMapper;
 import online.decentworld.rdb.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,21 +12,27 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Set;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={DBConfig.class})
 public class ServiceTest {
 
 	@Autowired
-	private UserMapper mapper;
+	private StrangerContactMapper mapper;
+	@Autowired
+	private FriendContactMapper mapper2;
 	@Autowired
 	private DataSourceTransactionManager tx;
 
 
 	@Test
 	public void test() throws InterruptedException {
-		User user=mapper.selectByPhoneNum("123");
-		System.out.println(user.getName());
+		Set set=mapper.getStrangerContacts("123");
+		System.out.println(set.size());
+		Set set2=mapper2.getFriendContacts("123");
+		System.out.println(set2.size());
 //		mapper.updateTest("123");
 
 
