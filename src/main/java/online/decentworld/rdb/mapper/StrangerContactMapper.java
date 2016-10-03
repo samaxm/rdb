@@ -1,6 +1,5 @@
 package online.decentworld.rdb.mapper;
 
-import online.decentworld.rdb.entity.FriendContact;
 import online.decentworld.rdb.entity.StrangerContact;
 import online.decentworld.rdb.entity.StrangerContactKey;
 
@@ -56,6 +55,6 @@ public interface StrangerContactMapper {
     int updateByPrimaryKey(StrangerContact record);
 
 
-    Set<FriendContact> getStrangerContacts(String dwid);
+    Set<StrangerContact> getStrangerContacts(String dwid);
 
 }

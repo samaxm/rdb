@@ -1,7 +1,14 @@
 package online.decentworld.rdb.config;
 
+import com.dangdang.ddframe.rdb.sharding.api.ShardingDataSourceFactory;
+import com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule;
+import com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule;
+import com.dangdang.ddframe.rdb.sharding.api.rule.TableRule;
+import com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import online.decentworld.rdb.mapper.*;
+import online.decentworld.rdb.rule.ChatIndexTableShardingStrategy;
+import online.decentworld.tools.EnvironmentCofing;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.slf4j.Logger;
@@ -14,6 +21,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 
 
 /**
@@ -115,6 +124,14 @@ public class DBConfig {
 		return mapper;
 	}
 
+	@Bean
+	public MapperFactoryBean<ChatIndexMapper> getChatIndexMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<ChatIndexMapper> mapper=new MapperFactoryBean<ChatIndexMapper>();
+		mapper.setMapperInterface(ChatIndexMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+
 
 	@Bean
 	public MapperFactoryBean<ConsumePriceMapper> getConsumePriceMapper(SqlSessionFactoryBean bean) throws Exception{
@@ -139,7 +156,6 @@ public class DBConfig {
 		mapper.setSqlSessionFactory(bean.getObject());
 		return mapper;
 	}
-
 
 
 	@Bean
@@ -178,26 +194,30 @@ public class DBConfig {
 	 */
 	@Bean
 	public DataSource getC3p0DataSoure() throws PropertyVetoException{
+
 		String path=DBConfig.class.getClassLoader().getResource("c3p0_config.xml").getPath();
 		path=path.replace("file","classloader");
 		logger.info("[C3P0_CONFIG_PATH] #"+path);
 		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
-//		Properties p=new Properties();
-//		try {
-//			String daPath=DBConfig.class.getClassLoader().getResource("dataSource.properties").getPath();
-//			logger.info("[ENVIRONMENT] #"+daPath);
-//			File f=new File(daPath);
-//			p.load(new FileInputStream(f));
-//		} catch (Exception e) {
-//			logger.warn("",e);
-//		}
-//
-//		String ENVIORMENT=p.getProperty("ENVIORMENT");
-//		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
-				ComboPooledDataSource cpds = new ComboPooledDataSource("LOCAL");
-		return cpds;
+		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
+//				ComboPooledDataSource cpds = new ComboPooledDataSource("LOCAL");
+		HashMap<String,DataSource> map=new HashMap<>(1);
+		map.put(EnvironmentCofing.environment.name().toUpperCase(),cpds);
+		DataSourceRule dataSourceRule=new DataSourceRule(map);
+		TableRule chatIndexTableRule=TableRule.builder("t_chat_index").dataSourceRule(dataSourceRule)
+				.actualTables(Arrays.asList("t_chat_index_0","t_chat_index_1"))
+				.build();
+		ShardingRule shardingRule = ShardingRule.builder()
+				.dataSourceRule(dataSourceRule)
+				.tableRules(Arrays.asList(chatIndexTableRule))
+				.tableShardingStrategy(new TableShardingStrategy("dwID", new ChatIndexTableShardingStrategy()))
+				.build();
+		DataSource dataSource = ShardingDataSourceFactory.createDataSource(shardingRule);
+
+		return dataSource;
 	}
-	
+
+
 
 	public static void main(String[] args) {
 		String path="file:/decentworld/tomcat/apache-tomcat-7.0.64/webapps/face2face/WEB-INF/lib/rdb-0.0.1-SNAPSHOT.jar!/online/decentworld/rdb/config/c3p0_config.xml";

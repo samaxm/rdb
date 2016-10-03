@@ -34,16 +34,12 @@
 		</javaClientGenerator>
 
 
-		<table tableName="t_stranger_contact" domainObjectName="StrangerContact"
+		<table tableName="t_chat_record" domainObjectName="ChatRecord"
 			   enableCountByExample="false" enableUpdateByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false"
 			   selectByExampleQueryId="false">
 		</table>
-		<table tableName="t_friend_contact" domainObjectName="FriendContact"
-			   enableCountByExample="false" enableUpdateByExample="false"
-			   enableDeleteByExample="false" enableSelectByExample="false"
-			   selectByExampleQueryId="false">
-		</table>
+
 
 		<!-- 		<table tableName="t_phonenum_record" domainObjectName="PhoneNumRecord"
                     enableCountByExample="false" enableUpdateByExample="false"

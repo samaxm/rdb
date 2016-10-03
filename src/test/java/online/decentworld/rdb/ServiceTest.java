@@ -1,7 +1,9 @@
 package online.decentworld.rdb;
 
 import online.decentworld.rdb.config.DBConfig;
+import online.decentworld.rdb.entity.ChatIndex;
 import online.decentworld.rdb.entity.User;
+import online.decentworld.rdb.mapper.ChatIndexMapper;
 import online.decentworld.rdb.mapper.FriendContactMapper;
 import online.decentworld.rdb.mapper.StrangerContactMapper;
 import online.decentworld.rdb.mapper.UserMapper;
@@ -12,6 +14,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -20,20 +23,17 @@ import java.util.Set;
 public class ServiceTest {
 
 	@Autowired
-	private StrangerContactMapper mapper;
+	private UserMapper userMapper;
 	@Autowired
-	private FriendContactMapper mapper2;
+	private ChatIndexMapper chatIndexMapper;
 	@Autowired
 	private DataSourceTransactionManager tx;
 
 
 	@Test
 	public void test() throws InterruptedException {
-		Set set=mapper.getStrangerContacts("123");
-		System.out.println(set.size());
-		Set set2=mapper2.getFriendContacts("123");
-		System.out.println(set2.size());
-//		mapper.updateTest("123");
+		List<ChatIndex> lists=chatIndexMapper.getUserChats("123", "456");
+		System.out.println(lists.size());
 
 
 //		ID id=mapper.getChatID();
