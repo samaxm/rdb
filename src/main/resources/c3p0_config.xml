@@ -15,8 +15,7 @@
     <property name="unreturnedConnectionTimeout">60</property>
     <property name="debugUnreturnedConnectionStackTraces">true</property>
   </named-config>
-  
-  
+
    <!-- 云端测试数据库 -->
   <named-config name="SERVER">
     <property name="acquireIncrement">10</property>

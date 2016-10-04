@@ -8,6 +8,7 @@ import com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrateg
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import online.decentworld.rdb.mapper.*;
 import online.decentworld.rdb.rule.ChatIndexTableShardingStrategy;
+import online.decentworld.rdb.rule.ChatRecordTableShardingStrategy;
 import online.decentworld.tools.EnvironmentCofing;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
@@ -125,13 +126,20 @@ public class DBConfig {
 	}
 
 	@Bean
+	public MapperFactoryBean<ChatRecordMapper> getChatRecordMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<ChatRecordMapper> mapper=new MapperFactoryBean<ChatRecordMapper>();
+		mapper.setMapperInterface(ChatRecordMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+
+	@Bean
 	public MapperFactoryBean<ChatIndexMapper> getChatIndexMapper(SqlSessionFactoryBean bean) throws Exception{
 		MapperFactoryBean<ChatIndexMapper> mapper=new MapperFactoryBean<ChatIndexMapper>();
 		mapper.setMapperInterface(ChatIndexMapper.class);
 		mapper.setSqlSessionFactory(bean.getObject());
 		return mapper;
 	}
-
 
 	@Bean
 	public MapperFactoryBean<ConsumePriceMapper> getConsumePriceMapper(SqlSessionFactoryBean bean) throws Exception{
@@ -206,11 +214,18 @@ public class DBConfig {
 		DataSourceRule dataSourceRule=new DataSourceRule(map);
 		TableRule chatIndexTableRule=TableRule.builder("t_chat_index").dataSourceRule(dataSourceRule)
 				.actualTables(Arrays.asList("t_chat_index_0","t_chat_index_1"))
+				.tableShardingStrategy(new TableShardingStrategy("dwID", new ChatIndexTableShardingStrategy()))
 				.build();
+
+		TableRule chatRecordTableRule=TableRule.builder("t_chat_record").dataSourceRule(dataSourceRule)
+				.actualTables(Arrays.asList("t_chat_record_0", "t_chat_record_1", "t_chat_record_2", "t_chat_record_3", "t_chat_record_4","t_chat_record_5",
+						"t_chat_record_6","t_chat_record_7","t_chat_record_8","t_chat_record_9"))
+				.tableShardingStrategy(new TableShardingStrategy("mid", new ChatRecordTableShardingStrategy()))
+				.build();
+
 		ShardingRule shardingRule = ShardingRule.builder()
 				.dataSourceRule(dataSourceRule)
-				.tableRules(Arrays.asList(chatIndexTableRule))
-				.tableShardingStrategy(new TableShardingStrategy("dwID", new ChatIndexTableShardingStrategy()))
+				.tableRules(Arrays.asList(chatIndexTableRule, chatRecordTableRule))
 				.build();
 		DataSource dataSource = ShardingDataSourceFactory.createDataSource(shardingRule);
 

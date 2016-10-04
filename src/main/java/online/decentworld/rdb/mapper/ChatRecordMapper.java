@@ -1,6 +1,9 @@
 package online.decentworld.rdb.mapper;
 
 import online.decentworld.rdb.entity.ChatRecord;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ChatRecordMapper {
     /**
@@ -50,4 +53,9 @@ public interface ChatRecordMapper {
      * @mbggenerated Mon Oct 03 20:36:49 CST 2016
      */
     int updateByPrimaryKeyWithBLOBs(ChatRecord record);
+
+
+    void batchInsertRecord(@Param("records") List<ChatRecord> records);
+
+    List<ChatRecord> searchRecords(@Param(value = "dwID")String dwID,@Param(value = "contactID")String contactID);
 }

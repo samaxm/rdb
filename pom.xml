@@ -212,6 +212,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>online.decentworld</groupId>
+			<artifactId>cache</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
 			<groupId>com.dangdang</groupId>
 			<artifactId>sharding-jdbc-core</artifactId>
 			<version>1.3.2</version>
