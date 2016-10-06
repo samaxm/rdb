@@ -54,6 +54,8 @@ public interface ChatRecordMapper {
      */
     int updateByPrimaryKeyWithBLOBs(ChatRecord record);
 
+    List<ChatRecord> searchRecordsByID(@Param("indexs")List<Long> indexs);
+
 
     void batchInsertRecord(@Param("records") List<ChatRecord> records);
 

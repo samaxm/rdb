@@ -23,7 +23,6 @@
       <result column="sign" property="sign" jdbcType="VARCHAR" />
       <result column="sex" property="sex" jdbcType="INTEGER" />
       <result column="type" property="type" jdbcType="VARCHAR" />
-      <result column="wealth" property="wealth" jdbcType="INTEGER" />
     </association>
   </resultMap>
   
@@ -36,9 +35,7 @@
     dwID, likedID, time
   </sql>
   <select id="getLikeRecords" resultMap="LikeRecordDetail" parameterType="java.lang.String" >
-    SELECT u.id,u.icon,u.name,u.area,u.worth,u.sign,u.sex,u.type,l.time,w.wealth FROM
-    t_wealth w RIGHT JOIN user u
-    on w.dwID=u.id
+    SELECT u.id,u.icon,u.name,u.area,u.worth,u.sign,u.sex,u.type,l.time FROM user u
     RIGHT join t_like l ON u.id=l.likedID
     where l.dwID=#{dwID,jdbcType=VARCHAR}
   </select>

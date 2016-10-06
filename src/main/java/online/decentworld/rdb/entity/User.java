@@ -448,4 +448,22 @@ public class User {
     public void setInit(Boolean init) {
         this.init = init;
     }
+
+    public User(){};
+    public User(String id, String unionid, String openid, String icon, String name, String password, String area, Integer worth, String sign, Integer sex, String phone, Integer version, String type, Boolean init) {
+        this.id = id;
+        this.unionid = unionid;
+        this.openid = openid;
+        this.icon = icon;
+        this.name = name;
+        this.password = password;
+        this.area = area;
+        this.worth = worth;
+        this.sign = sign;
+        this.sex = sex;
+        this.phone = phone;
+        this.version = version;
+        this.type = type;
+        this.init = init;
+    }
 }

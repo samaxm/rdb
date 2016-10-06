@@ -160,4 +160,12 @@ public class ChatIndex {
     public void setChatRecordId(Long chatRecordId) {
         this.chatRecordId = chatRecordId;
     }
+
+    public ChatIndex(){}
+    public ChatIndex(String dwid, String contactid,boolean isSend, Long chatRecordId) {
+        this.dwid = dwid;
+        this.contactid = contactid;
+        this.setIsSend(isSend ?(byte)1:(byte)0);
+        this.chatRecordId = chatRecordId;
+    }
 }

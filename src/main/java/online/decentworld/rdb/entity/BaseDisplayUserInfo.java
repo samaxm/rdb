@@ -10,7 +10,7 @@ public class BaseDisplayUserInfo {
 
 	private String dwID;
 	
-	private int sex;
+	private Integer sex;
 	
 	private String name;
 	
@@ -20,9 +20,7 @@ public class BaseDisplayUserInfo {
 	
 	private String sign;
 	
-	private int worth;
-	
-	private int wealth;
+	private Integer worth;
 
 	private String type;
 
@@ -35,11 +33,11 @@ public class BaseDisplayUserInfo {
 		this.dwID = dwID;
 	}
 
-	public int getSex() {
+	public Integer getSex() {
 		return sex;
 	}
 
-	public void setSex(int sex) {
+	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
 
@@ -75,20 +73,12 @@ public class BaseDisplayUserInfo {
 		this.sign = sign;
 	}
 
-	public int getWorth() {
+	public Integer getWorth() {
 		return worth;
 	}
 
-	public void setWorth(int worth) {
+	public void setWorth(Integer worth) {
 		this.worth = worth;
-	}
-
-	public int getWealth() {
-		return wealth;
-	}
-
-	public void setWealth(int wealth) {
-		this.wealth = wealth;
 	}
 
 	public String getType() {
@@ -97,5 +87,20 @@ public class BaseDisplayUserInfo {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public BaseDisplayUserInfo() {
+
+	}
+
+	public BaseDisplayUserInfo(User user) {
+		this.setArea(user.getArea());
+		this.setDwID(user.getId());
+		this.setIcon(user.getIcon());
+		this.setSex(user.getSex());
+		this.setSign(user.getSign());
+		this.setWorth(user.getWorth());
+		this.setName(user.getName());
+		this.setType(user.getType());
 	}
 }

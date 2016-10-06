@@ -43,9 +43,14 @@ public class ServiceTest {
 
 	@Test
 	public void test() throws InterruptedException {
-
-		List<LikeRecordDetail> list=likeRecordMapper.getLikeRecords("2419918324");
-		System.out.println(JSON.toJSONString(list));
+//		List<Long> list=new LinkedList<>();
+//		list.add(1l);
+//		list.add(2l);
+//		list.add(3l);
+//		List s=chatRecordMapper.searchRecordsByID(list);
+//		System.out.println(s.size());
+//		List<LikeRecordDetail> list=likeRecordMapper.getLikeRecords("2419918324");
+//		System.out.println(JSON.toJSONString(list));
 //		RedisTemplate template=new RedisTemplate();
 ////		SimpleProtosCodec code=new SimpleProtosCodec();
 ////		code.setConverterFactory(new ReflectBodyConverterFactory());

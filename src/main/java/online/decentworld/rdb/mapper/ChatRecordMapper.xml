@@ -29,6 +29,21 @@
     contactID = #{contactID,jdbcType=VARCHAR},
   </select>
 
+
+  <select id="searchRecordsByID" resultMap="ResultMapWithBLOBs" parameterType="java.util.List" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_chat_record
+    where mid IN
+    <foreach item="item" collection="indexs" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+
+  </select>
+
+
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />

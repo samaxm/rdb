@@ -277,7 +277,7 @@
   <update id="resetPassword" parameterType="java.lang.String">
     update user
     set
-    password = #{password,jdbcType=VARCHAR}
+    password = #{password,jdbcType=VARCHAR},init=true
     where phone = #{phone,jdbcType=VARCHAR}
   </update>
 </mapper>
