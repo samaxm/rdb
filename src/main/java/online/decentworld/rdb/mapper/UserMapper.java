@@ -52,14 +52,21 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User record);
 
+    String getUserPassword(@Param("dwID") String dwID);
 
 
+    String getUserPayPassword(@Param("dwID") String dwID);
 
-    String getUserPassword(String dwID);
 
-    User selectByUnionid(String unionid);
+    User selectByUnionid(@Param("unionid") String unionid);
 
-    User selectByPhoneNum(String phoneNum);
+    User selectByPhoneNum(@Param("phoneNum") String phoneNum);
 
     int resetPassword(@Param("phone") String phone,@Param("password") String password);
+
+    void setPayPassword(@Param("id") String dwID,@Param("paypassowrd") String paypassowrd);
+
+    void bindPhoneNum(@Param("phone") String phone,@Param("id") String dwID);
+
+    void bindAccount(@Param("account") String account,@Param("accountType") String accountType,@Param("id") String dwID);
 }

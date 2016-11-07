@@ -23,4 +23,8 @@ public class DBChargeResult {
         this.resultCode = resultCode;
     }
 
+
+    public static int SUCCESS=1;
+    public static int WEALTH_NOT_ENOUGH=0;
+    public static int USER_NOT_FOUND=3;
 }

@@ -23,6 +23,7 @@
       <result column="sign" property="sign" jdbcType="VARCHAR" />
       <result column="sex" property="sex" jdbcType="INTEGER" />
       <result column="type" property="type" jdbcType="VARCHAR" />
+      <result column="icon" property="icon" jdbcType="VARCHAR" />
     </association>
   </resultMap>
   

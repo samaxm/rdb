@@ -1,14 +1,7 @@
 package online.decentworld.rdb.config;
 
-import com.dangdang.ddframe.rdb.sharding.api.ShardingDataSourceFactory;
-import com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule;
-import com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule;
-import com.dangdang.ddframe.rdb.sharding.api.rule.TableRule;
-import com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import online.decentworld.rdb.mapper.*;
-import online.decentworld.rdb.rule.ChatIndexTableShardingStrategy;
-import online.decentworld.rdb.rule.ChatRecordTableShardingStrategy;
 import online.decentworld.tools.EnvironmentCofing;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
@@ -22,8 +15,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
 
 
 /**
@@ -158,9 +149,9 @@ public class DBConfig {
 	}
 
 	@Bean
-	public MapperFactoryBean<PayPasswordMapper> getPayPasswordMapper(SqlSessionFactoryBean bean) throws Exception{
-		MapperFactoryBean<PayPasswordMapper> mapper=new MapperFactoryBean<PayPasswordMapper>();
-		mapper.setMapperInterface(PayPasswordMapper.class);
+	public MapperFactoryBean<TransferHistoryMapper> getTransferHistoryMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<TransferHistoryMapper> mapper=new MapperFactoryBean<TransferHistoryMapper>();
+		mapper.setMapperInterface(TransferHistoryMapper.class);
 		mapper.setSqlSessionFactory(bean.getObject());
 		return mapper;
 	}
@@ -209,27 +200,27 @@ public class DBConfig {
 		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
 		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
 //				ComboPooledDataSource cpds = new ComboPooledDataSource("LOCAL");
-		HashMap<String,DataSource> map=new HashMap<>(1);
-		map.put(EnvironmentCofing.environment.name().toUpperCase(),cpds);
-		DataSourceRule dataSourceRule=new DataSourceRule(map);
-		TableRule chatIndexTableRule=TableRule.builder("t_chat_index").dataSourceRule(dataSourceRule)
-				.actualTables(Arrays.asList("t_chat_index_0","t_chat_index_1"))
-				.tableShardingStrategy(new TableShardingStrategy("dwID", new ChatIndexTableShardingStrategy()))
-				.build();
+//		HashMap<String,DataSource> map=new HashMap<>(1);
+//		map.put(EnvironmentCofing.environment.name().toUpperCase(),cpds);
+//		DataSourceRule dataSourceRule=new DataSourceRule(map);
+//		TableRule chatIndexTableRule=TableRule.builder("t_chat_index").dataSourceRule(dataSourceRule)
+//				.actualTables(Arrays.asList("t_chat_index_0","t_chat_index_1"))
+//				.tableShardingStrategy(new TableShardingStrategy("dwID", new ChatIndexTableShardingStrategy()))
+//				.build();
+//
+//		TableRule chatRecordTableRule=TableRule.builder("t_chat_record").dataSourceRule(dataSourceRule)
+//				.actualTables(Arrays.asList("t_chat_record_0", "t_chat_record_1", "t_chat_record_2", "t_chat_record_3", "t_chat_record_4","t_chat_record_5",
+//						"t_chat_record_6","t_chat_record_7","t_chat_record_8","t_chat_record_9"))
+//				.tableShardingStrategy(new TableShardingStrategy("mid", new ChatRecordTableShardingStrategy()))
+//				.build();
+//
+//		ShardingRule shardingRule = ShardingRule.builder()
+//				.dataSourceRule(dataSourceRule)
+//				.tableRules(Arrays.asList(chatIndexTableRule, chatRecordTableRule))
+//				.build();
+//		DataSource dataSource = ShardingDataSourceFactory.createDataSource(shardingRule);
 
-		TableRule chatRecordTableRule=TableRule.builder("t_chat_record").dataSourceRule(dataSourceRule)
-				.actualTables(Arrays.asList("t_chat_record_0", "t_chat_record_1", "t_chat_record_2", "t_chat_record_3", "t_chat_record_4","t_chat_record_5",
-						"t_chat_record_6","t_chat_record_7","t_chat_record_8","t_chat_record_9"))
-				.tableShardingStrategy(new TableShardingStrategy("mid", new ChatRecordTableShardingStrategy()))
-				.build();
-
-		ShardingRule shardingRule = ShardingRule.builder()
-				.dataSourceRule(dataSourceRule)
-				.tableRules(Arrays.asList(chatIndexTableRule, chatRecordTableRule))
-				.build();
-		DataSource dataSource = ShardingDataSourceFactory.createDataSource(shardingRule);
-
-		return dataSource;
+		return cpds;
 	}
 
 

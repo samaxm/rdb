@@ -8,7 +8,6 @@ import online.decentworld.rdb.entity.ChatRecord;
 import online.decentworld.rdb.mapper.ChatIndexMapper;
 import online.decentworld.rdb.mapper.ChatRecordMapper;
 import online.decentworld.rpc.codc.Codec;
-import online.decentworld.rpc.dto.message.ChatMessage;
 import online.decentworld.rpc.dto.message.MessageWrapper;
 import online.decentworld.rpc.dto.message.types.MessageType;
 import online.decentworld.tools.LogUtil;
@@ -42,7 +41,7 @@ public class ChatHistoryPersistTask implements Job{
         ReturnResult result=template.cache((Jedis jedis)->{
             List<byte[]> list=null;
             Set<String> ids=jedis.smembers(CacheKey.MESSSAGE_STORE_SET);
-            list=template.getFromHSETBytes(CacheKey.CHAT,ids,jedis);
+            list=template.getFromHSETBytes(CacheKey.MESSAGE,ids,jedis);
             return ReturnResult.result(list);
         });
         if(result.isSuccess()&&result.getResult()!=null){
@@ -50,13 +49,15 @@ public class ChatHistoryPersistTask implements Job{
             List<Long> stored=new LinkedList<>();
             List<Long> failed=new LinkedList<>();
             msgs.forEach((byte[] data)->{
-                Long mid=null;
+                long mid=-1;
                 try {
                     MessageWrapper mw = codec.decode(data);
-                    if (mw.getType() == MessageType.CHAT) {
-                        String receiver = mw.getReceiver();
-                        String sender = mw.getSender();
-                        mid = ((ChatMessage) mw.getBody()).getMid();
+                    mid=mw.getMid();
+                    if (mw.getType() == MessageType.CHAT_TEXT||
+                            mw.getType() == MessageType.CHAT_IMAGE||
+                            mw.getType() == MessageType.CHAT_AUDIO) {
+                        String receiver = mw.getReceiverID();
+                        String sender = mw.getSenderID();
                         ChatIndex index = new ChatIndex(sender, receiver, true, mid);
                         ChatIndex index2 = new ChatIndex(receiver, sender, false, mid);
                         ChatRecord cr = new ChatRecord();
@@ -65,15 +66,13 @@ public class ChatHistoryPersistTask implements Job{
                         indexMapper.insert(index);
                         indexMapper.insert(index2);
                         recordMapper.insert(cr);
-                        stored.add(mid);
-                        mid=null;
                     }
+                    stored.add(mid);
                 }catch (Exception e){
                     logger.warn("[ERROR_PERSIST] ",e);
-                    if(mid!=null){
+                    if(mid!=-1){
                         failed.add(mid);
                     }
-                    mid=null;
                 }
             });
             //clean cache
@@ -83,7 +82,7 @@ public class ChatHistoryPersistTask implements Job{
                 }
                 stored.addAll(failed);
                 if(stored.size()!=0)
-                    jedis.hdel(CacheKey.CHAT,stored.toArray(new String[stored.size()]));
+                    jedis.hdel(CacheKey.MESSAGE,stored.toArray(new String[stored.size()]));
                 return ReturnResult.SUCCESS;
             });
             if(!result1.isSuccess()){

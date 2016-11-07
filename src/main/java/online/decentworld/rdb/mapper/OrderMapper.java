@@ -1,6 +1,7 @@
 package online.decentworld.rdb.mapper;
 
 import online.decentworld.rdb.entity.Order;
+import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
     /**
@@ -51,6 +52,6 @@ public interface OrderMapper {
      */
     int updateByPrimaryKey(Order record);
 
-    void updateStatus(String orderNum,boolean status);
+    void updateStatus(@Param("ordernumer") String orderNum,@Param("isPaid") boolean status);
 
 }

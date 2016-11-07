@@ -10,7 +10,6 @@ import online.decentworld.rdb.entity.ChatRecord;
 import online.decentworld.rdb.entity.LikeRecordDetail;
 import online.decentworld.rdb.entity.User;
 import online.decentworld.rdb.mapper.*;
-import online.decentworld.rpc.codc.protos.ReflectBodyConverterFactory;
 import online.decentworld.rpc.codc.protos.SimpleProtosCodec;
 import online.decentworld.rpc.dto.message.MessageWrapper;
 import org.junit.Test;
