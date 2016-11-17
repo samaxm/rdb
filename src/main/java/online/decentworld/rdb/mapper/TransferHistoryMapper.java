@@ -50,4 +50,6 @@ public interface TransferHistoryMapper {
      * @mbggenerated Mon Nov 07 16:21:04 CST 2016
      */
     int updateByPrimaryKey(TransferHistory record);
+
+
 }

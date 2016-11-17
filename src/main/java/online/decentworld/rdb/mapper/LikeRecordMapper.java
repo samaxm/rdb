@@ -2,6 +2,7 @@ package online.decentworld.rdb.mapper;
 
 import online.decentworld.rdb.entity.LikeRecord;
 import online.decentworld.rdb.entity.LikeRecordDetail;
+import online.decentworld.rdb.entity.LikeRecordKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -26,6 +27,12 @@ public interface LikeRecordMapper {
     int insertSelective(LikeRecord record);
     
     List<LikeRecordDetail> getLikeRecords(@Param("dwID")String dwID);
+
+    int deleteByPrimaryKey(LikeRecordKey key);
+
+    List<LikeRecordDetail> getLikeRequest(@Param("dwID")String dwID);
+
+    void acceptRequest(LikeRecordKey key);
 
 
 }

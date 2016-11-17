@@ -9,6 +9,7 @@ public class LikeRecordDetail {
 
    private BaseDisplayUserInfo info;
     private Date time;
+    private String status;
 
     public LikeRecordDetail() {
     }
@@ -28,5 +29,13 @@ public class LikeRecordDetail {
 
     public void setInfo(BaseDisplayUserInfo info) {
         this.info = info;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

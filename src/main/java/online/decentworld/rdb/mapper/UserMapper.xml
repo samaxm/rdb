@@ -328,6 +328,17 @@
     from user
     where phone = #{phoneNum,jdbcType=VARCHAR}
   </select>
+
+
+  <select id="getAllUsers" resultMap="BaseResultMap">
+
+    select
+    *
+    from user
+
+  </select>
+
+
   <select id="getUserPassword" parameterType="java.lang.String" resultType="java.lang.String">
     <!--
       WARNING - @mbggenerated
@@ -337,7 +348,7 @@
     select
     password
     from user
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{dwID,jdbcType=VARCHAR}
   </select>
 
   <select id="getUserPayPassword" parameterType="java.lang.String" resultType="java.lang.String">

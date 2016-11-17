@@ -156,6 +156,13 @@ public class DBConfig {
 		return mapper;
 	}
 
+	@Bean
+	public MapperFactoryBean<TipRecordsMapper> getTipRecordsMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<TipRecordsMapper> mapper=new MapperFactoryBean<TipRecordsMapper>();
+		mapper.setMapperInterface(TipRecordsMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
 
 	@Bean
 	public MapperFactoryBean<ReportRecordMapper> getReportRecord(SqlSessionFactoryBean bean) throws Exception{
@@ -199,6 +206,7 @@ public class DBConfig {
 		logger.info("[C3P0_CONFIG_PATH] #"+path);
 		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
 		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
+//		ComboPooledDataSource cpds = new ComboPooledDataSource(Environment.LOCAL.name());
 //				ComboPooledDataSource cpds = new ComboPooledDataSource("LOCAL");
 //		HashMap<String,DataSource> map=new HashMap<>(1);
 //		map.put(EnvironmentCofing.environment.name().toUpperCase(),cpds);

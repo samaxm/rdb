@@ -5,10 +5,7 @@ import online.decentworld.cache.redis.CacheKey;
 import online.decentworld.cache.redis.RedisTemplate;
 import online.decentworld.cache.redis.ReturnResult;
 import online.decentworld.rdb.config.DBConfig;
-import online.decentworld.rdb.entity.ChatIndex;
-import online.decentworld.rdb.entity.ChatRecord;
-import online.decentworld.rdb.entity.LikeRecordDetail;
-import online.decentworld.rdb.entity.User;
+import online.decentworld.rdb.entity.*;
 import online.decentworld.rdb.mapper.*;
 import online.decentworld.rpc.codc.protos.SimpleProtosCodec;
 import online.decentworld.rpc.dto.message.MessageWrapper;
@@ -38,10 +35,14 @@ public class ServiceTest {
 	private LikeRecordMapper likeRecordMapper;
 	@Autowired
 	private DataSourceTransactionManager tx;
-
+	@Autowired
+	private TransferHistoryMapper transferHistoryMapper;
 
 	@Test
 	public void test() throws InterruptedException {
+//		TransferHistory t=new TransferHistory("123",1,"123","123");
+//		transferHistoryMapper.insert(t);
+//		System.out.println(t.getId());
 //		List<Long> list=new LinkedList<>();
 //		list.add(1l);
 //		list.add(2l);
