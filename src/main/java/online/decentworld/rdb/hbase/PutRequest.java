@@ -22,13 +22,13 @@ public class PutRequest {
         return columnFamily;
     }
 
-    public PutRequest (String table,String columnFamily){
-        this.table=table.getBytes();
-        this.columnFamily=columnFamily.getBytes();
+    public PutRequest (byte[] table,byte[] columnFamily){
+        this.table=table;
+        this.columnFamily=columnFamily;
     }
 
-    public void add(String rowkey,String colmn,byte[] value){
-        rows.add(new Row(rowkey.getBytes(),colmn.getBytes(),value));
+    public void add(byte[] rowkey,byte[] column,byte[] value){
+        rows.add(new Row(rowkey,column,value));
     }
 
     public List<Row> getRows(){

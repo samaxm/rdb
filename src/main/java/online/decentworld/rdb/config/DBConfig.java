@@ -202,9 +202,9 @@ public class DBConfig {
 	public DataSource getC3p0DataSoure() throws PropertyVetoException{
 
 		String path=DBConfig.class.getClassLoader().getResource("c3p0_config.xml").getPath();
-		path=path.replace("file","classloader");
+//		path=path.replace("file","classloader");
 		logger.info("[C3P0_CONFIG_PATH] #"+path);
-		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
+//		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
 		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
 //		ComboPooledDataSource cpds = new ComboPooledDataSource(Environment.LOCAL.name());
 //				ComboPooledDataSource cpds = new ComboPooledDataSource("LOCAL");

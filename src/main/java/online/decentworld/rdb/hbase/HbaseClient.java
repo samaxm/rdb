@@ -23,9 +23,9 @@ public class HbaseClient {
     private static HbaseClient client;
     public synchronized static HbaseClient instance(){
         if(client==null)
-            return new HbaseClient();
-        else
-            return client;
+            client=new HbaseClient();
+
+        return client;
     }
 
     private Connection connection;
@@ -34,10 +34,10 @@ public class HbaseClient {
         Configuration configuration= HBaseConfiguration.create();
         configuration.set("hbase.zookeeper.quorum",HBASE_ZK);
         configuration.set("hbase.zookeeper.property.clientPort",HBASE_ZK_PORT);
-        Connection connection=null;
-
         try {
             connection = ConnectionFactory.createConnection(configuration);
+            while (connection==null){
+            }
         }catch (Exception e){
             logger.warn("",e);
         }
@@ -107,6 +107,7 @@ public class HbaseClient {
                         puts.add(put);
                     }
                     table.put(puts);
+                    table.flushCommits();
                 }finally {
                     realseResource(table);
                 }
@@ -115,10 +116,10 @@ public class HbaseClient {
     }
 
 
-    public Result get(String tableName,byte[] rowkey) throws IOException {
+    public Result get(byte[] tableName,byte[] rowkey) throws IOException {
         HTable table=null;
         try {
-            table= (HTable) connection.getTable(TableName.valueOf(tableName.getBytes()));
+            table= (HTable) connection.getTable(TableName.valueOf(tableName));
             Get get=new Get(rowkey);
             return table.get(get);
         }finally {
@@ -159,6 +160,7 @@ public class HbaseClient {
             }
         }
     }
+
     public synchronized  void close(){
         if(connection!=null){
             try{
