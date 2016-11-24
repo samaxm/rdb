@@ -24,6 +24,16 @@ public class BaseDisplayUserInfo {
 
 	private String type;
 
+	private String tag;
+
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 
 	public String getDwID() {
 		return dwID;
@@ -102,5 +112,6 @@ public class BaseDisplayUserInfo {
 		this.setWorth(user.getWorth());
 		this.setName(user.getName());
 		this.setType(user.getType());
+		this.setTag(user.getTag());
 	}
 }

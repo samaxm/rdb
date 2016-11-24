@@ -172,7 +172,29 @@ public class DBConfig {
 		return mapper;
 	}
 
+	@Bean
+	public MapperFactoryBean<PartnerCodeMapper> getPartnerCodeMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<PartnerCodeMapper> mapper=new MapperFactoryBean<PartnerCodeMapper>();
+		mapper.setMapperInterface(PartnerCodeMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
 
+	@Bean
+	public MapperFactoryBean<WorthChangeRecordsMapper> getWorthChangeRecordsMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<WorthChangeRecordsMapper> mapper=new MapperFactoryBean<WorthChangeRecordsMapper>();
+		mapper.setMapperInterface(WorthChangeRecordsMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+
+	@Bean
+	public MapperFactoryBean<VipRecordsMapper> getVipRecordsMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<VipRecordsMapper> mapper=new MapperFactoryBean<VipRecordsMapper>();
+		mapper.setMapperInterface(VipRecordsMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
 
 	
 	/**
@@ -201,9 +223,9 @@ public class DBConfig {
 	@Bean
 	public DataSource getC3p0DataSoure() throws PropertyVetoException{
 
-		String path=DBConfig.class.getClassLoader().getResource("c3p0_config.xml").getPath();
+//		String path=DBConfig.class.getClassLoader().getResource("c3p0_config.xml").getPath();
 //		path=path.replace("file","classloader");
-		logger.info("[C3P0_CONFIG_PATH] #"+path);
+//		logger.info("[C3P0_CONFIG_PATH] #"+path);
 //		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
 		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
 //		ComboPooledDataSource cpds = new ComboPooledDataSource(Environment.LOCAL.name());

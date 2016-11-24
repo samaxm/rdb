@@ -60,6 +60,10 @@ public interface UserMapper {
     String getUserPayPassword(@Param("dwID") String dwID);
 
 
+    String getUserType(@Param("dwID") String dwID);
+
+    void setUserType(@Param("dwID") String dwID,@Param("type") String type);
+
     User selectByUnionid(@Param("unionid") String unionid);
 
     User selectByPhoneNum(@Param("phoneNum") String phoneNum);

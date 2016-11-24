@@ -33,11 +33,15 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
-		<table tableName="t_like" domainObjectName="LikeRecord"
+		<table tableName="t_partner_code" domainObjectName="PartnerCode"
 			   enableCountByExample="false" enableUpdateByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false"
 			   selectByExampleQueryId="false">
 		</table>
+
+
+
+
 
 		<!--<table tableName="t_account" domainObjectName="Account"
 			   enableCountByExample="false" enableUpdateByExample="false"

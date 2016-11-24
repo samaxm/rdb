@@ -147,15 +147,16 @@
       <result column="sex" jdbcType="INTEGER" property="sex" />
       <result column="type" jdbcType="VARCHAR" property="type" />
       <result column="icon" jdbcType="VARCHAR" property="icon" />
+      <result column="tag" jdbcType="VARCHAR" property="tag" />
     </association>
   </resultMap>
   <select id="getLikeRecords" parameterType="java.lang.String" resultMap="LikeRecordDetail">
-    SELECT u.id,u.icon,u.name,u.area,u.worth,u.sign,u.sex,u.type,l.time,l.status FROM user u
+    SELECT u.id,u.icon,u.name,u.area,u.worth,u.sign,u.sex,u.type,u.tag,l.time,l.status FROM user u
     RIGHT join t_like l ON u.id=l.likedID
     where l.dwID=#{dwID,jdbcType=VARCHAR}
   </select>
   <select id="getLikeRequest" parameterType="java.lang.String" resultMap="LikeRecordDetail">
-    SELECT u.id,u.icon,u.name,u.area,u.worth,u.sign,u.sex,u.type,l.time,l.status FROM user u
+    SELECT u.id,u.icon,u.name,u.area,u.worth,u.sign,u.sex,u.type,u.tag,l.time,l.status FROM user u
     RIGHT join t_like l ON u.id=l.dwID
     where l.likedID=#{dwID,jdbcType=VARCHAR} AND l.status='PROCESSING'
   </select>
