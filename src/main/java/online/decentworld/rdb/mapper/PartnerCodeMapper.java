@@ -54,4 +54,7 @@ public interface PartnerCodeMapper {
 
 
     PartnerCode isCodeExist(@Param(value = "code") String code);
+
+
+
 }
