@@ -127,13 +127,13 @@ public class HbaseClient {
         }
     }
 
-    public List<Result> scan(String tableName,byte[] profix,byte[] start,byte[] stop) throws IOException {
+    public List<Result> scan(byte[] tableName,byte[] profix,byte[] start,byte[] stop) throws IOException {
         HTable table=null;
         if(tableName==null||start==null||stop==null){
             throw new IllegalArgumentException("tableName#"+tableName+" start#"+start+" stop#"+stop);
         }
         try {
-            table= (HTable) connection.getTable(TableName.valueOf(tableName.getBytes()));
+            table= (HTable) connection.getTable(TableName.valueOf(tableName));
             Scan scan=new Scan();
             if(profix!=null){
                 scan.setRowPrefixFilter(profix);
@@ -142,6 +142,7 @@ public class HbaseClient {
             scan.setStopRow(stop);
             ResultScanner scanner=table.getScanner(scan);
             List<Result> results=new LinkedList<>();
+
             scanner.forEach((Result re)->{
                 results.add(re);
             });

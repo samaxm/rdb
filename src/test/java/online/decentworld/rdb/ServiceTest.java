@@ -1,32 +1,24 @@
 package online.decentworld.rdb;
 
-import com.alibaba.fastjson.JSON;
-import online.decentworld.cache.redis.CacheKey;
-import online.decentworld.cache.redis.RedisTemplate;
-import online.decentworld.cache.redis.ReturnResult;
 import online.decentworld.rdb.config.DBConfig;
-import online.decentworld.rdb.entity.*;
+import online.decentworld.rdb.entity.PartnerCode;
+import online.decentworld.rdb.entity.VipRecords;
 import online.decentworld.rdb.mapper.*;
-import online.decentworld.rpc.codc.protos.SimpleProtosCodec;
-import online.decentworld.rpc.dto.message.MessageWrapper;
+import online.decentworld.tools.IDUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import redis.clients.jedis.Jedis;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={DBConfig.class})
 public class ServiceTest {
-
 	@Autowired
 	private UserMapper userMapper;
 	@Autowired
@@ -37,9 +29,20 @@ public class ServiceTest {
 	private DataSourceTransactionManager tx;
 	@Autowired
 	private TransferHistoryMapper transferHistoryMapper;
+	@Autowired
+	private WealthMapper wealthMapper;
+	@Autowired
+	private PartnerCodeMapper mapper;
+	@Autowired
+	private VipRecordsMapper vipRecordsMapper;
+
+
 
 	@Test
 	public void test() throws InterruptedException {
+		List<VipRecords> vipRecordses=vipRecordsMapper.scanVipRecords(0,10000);
+		System.out.println(vipRecordses.size());
+
 //		TransferHistory t=new TransferHistory("123",1,"123","123");
 //		transferHistoryMapper.insert(t);
 //		System.out.println(t.getId());

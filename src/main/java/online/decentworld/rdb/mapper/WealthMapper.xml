@@ -26,7 +26,7 @@
 
 
   <select id="charge" resultMap="ChargeResultMap" statementType="CALLABLE">
-    CALL face2face.CHANGE_WEALTH(#{dwID,mode=IN,jdbcType=VARCHAR},#{charge_amount,mode=IN,jdbcType=INTEGER},
+    CALL world.CHANGE_WEALTH(#{dwID,mode=IN,jdbcType=VARCHAR},#{charge_amount,mode=IN,jdbcType=INTEGER},
     #{statusCode,mode=OUT,jdbcType=INTEGER},#{newWealth,mode=OUT,jdbcType=INTEGER})
   </select>
 

@@ -19,6 +19,16 @@
     -->
     dwID, exp, expire
   </sql>
+
+
+  <select id="scanVipRecords" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  select
+  <include refid="Base_Column_List" />
+  from t_vip_records
+  limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     <!--
       WARNING - @mbggenerated

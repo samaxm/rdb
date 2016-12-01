@@ -2,7 +2,7 @@ package online.decentworld.rdb.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import online.decentworld.rdb.mapper.*;
-import online.decentworld.tools.EnvironmentCofing;
+import online.decentworld.tools.Environment;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.slf4j.Logger;
@@ -223,12 +223,14 @@ public class DBConfig {
 	@Bean
 	public DataSource getC3p0DataSoure() throws PropertyVetoException{
 
-//		String path=DBConfig.class.getClassLoader().getResource("c3p0_config.xml").getPath();
+//		String path=DBConfig.class.getClassLoader().getResource("c3p0-config.xml").getPath();
 //		path=path.replace("file","classloader");
 //		logger.info("[C3P0_CONFIG_PATH] #"+path);
 //		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
-		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
-//		ComboPooledDataSource cpds = new ComboPooledDataSource(Environment.LOCAL.name());
+
+//		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
+//		ComboPooledDataSource cpds = new ComboPooledDataSource(Environment.SERVER.name());
+		ComboPooledDataSource cpds = new ComboPooledDataSource(Environment.LOCAL.name());
 //				ComboPooledDataSource cpds = new ComboPooledDataSource("LOCAL");
 //		HashMap<String,DataSource> map=new HashMap<>(1);
 //		map.put(EnvironmentCofing.environment.name().toUpperCase(),cpds);
@@ -256,7 +258,7 @@ public class DBConfig {
 
 
 	public static void main(String[] args) {
-		String path="file:/decentworld/tomcat/apache-tomcat-7.0.64/webapps/face2face/WEB-INF/lib/rdb-0.0.1-SNAPSHOT.jar!/online/decentworld/rdb/config/c3p0_config.xml";
+		String path="file:/decentworld/tomcat/apache-tomcat-7.0.64/webapps/face2face/WEB-INF/lib/rdb-0.0.1-SNAPSHOT.jar!/online/decentworld/rdb/config/c3p0-config.xml";
 		path=path.replace("file:", "classloader:");
 		System.out.println(path);
 	}

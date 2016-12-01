@@ -1,6 +1,9 @@
 package online.decentworld.rdb.mapper;
 
 import online.decentworld.rdb.entity.VipRecords;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface VipRecordsMapper {
     /**
@@ -50,4 +53,7 @@ public interface VipRecordsMapper {
      * @mbggenerated Thu Nov 24 18:03:32 CST 2016
      */
     int updateByPrimaryKey(VipRecords record);
+
+
+    List<VipRecords> scanVipRecords(@Param(value = "start") int start,@Param(value = "end")int end);
 }
