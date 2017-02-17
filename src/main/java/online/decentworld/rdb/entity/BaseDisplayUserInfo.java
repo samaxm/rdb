@@ -26,6 +26,55 @@ public class BaseDisplayUserInfo {
 
 	private String tag;
 
+	private String age;
+
+	private String title;
+
+	private String company;
+
+	private String star;
+
+	private String realname;
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getStar() {
+		return star;
+	}
+
+	public void setStar(String star) {
+		this.star = star;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
 
 	public String getTag() {
 		return tag;
@@ -113,5 +162,10 @@ public class BaseDisplayUserInfo {
 		this.setName(user.getName());
 		this.setType(user.getType());
 		this.setTag(user.getTag());
+		this.setTitle(user.getTitle());
+		setAge(user.getAge());
+		setCompany(user.getCompany());
+		setStar(user.getStar());
+		setRealname(user.getRealname());
 	}
 }

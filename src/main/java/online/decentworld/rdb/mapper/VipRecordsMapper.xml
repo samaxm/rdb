@@ -38,7 +38,7 @@
     select 
     <include refid="Base_Column_List" />
     from t_vip_records
-    where dwID = #{dwid,jdbcType=VARCHAR}
+    where dwID = #{dwid,jdbcType=VARCHAR} for UPDATE
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     <!--

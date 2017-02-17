@@ -148,6 +148,11 @@
       <result column="type" jdbcType="VARCHAR" property="type" />
       <result column="icon" jdbcType="VARCHAR" property="icon" />
       <result column="tag" jdbcType="VARCHAR" property="tag" />
+      <result column="age" jdbcType="VARCHAR" property="age" />
+      <result column="realname" jdbcType="VARCHAR" property="realname" />
+      <result column="title" jdbcType="VARCHAR" property="title" />
+      <result column="star" jdbcType="VARCHAR" property="star" />
+      <result column="company" jdbcType="VARCHAR" property="company" />
     </association>
   </resultMap>
   <select id="getLikeRecords" parameterType="java.lang.String" resultMap="LikeRecordDetail">

@@ -2,7 +2,7 @@ package online.decentworld.rdb.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import online.decentworld.rdb.mapper.*;
-import online.decentworld.tools.Environment;
+import online.decentworld.tools.EnvironmentCofing;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.slf4j.Logger;
@@ -147,6 +147,13 @@ public class DBConfig {
 		mapper.setSqlSessionFactory(bean.getObject());
 		return mapper;
 	}
+	@Bean
+	public MapperFactoryBean<ActivityAnswerMapper> getActivityAnswerMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<ActivityAnswerMapper> mapper=new MapperFactoryBean<ActivityAnswerMapper>();
+		mapper.setMapperInterface(ActivityAnswerMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
 
 	@Bean
 	public MapperFactoryBean<TransferHistoryMapper> getTransferHistoryMapper(SqlSessionFactoryBean bean) throws Exception{
@@ -196,7 +203,17 @@ public class DBConfig {
 		return mapper;
 	}
 
-	
+	@Bean
+	public MapperFactoryBean<ActivityMapper> getActivityMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<ActivityMapper> mapper=new MapperFactoryBean<ActivityMapper>();
+		mapper.setMapperInterface(ActivityMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+
+
+
+
 	/**
 	 * SqlSessionFacory config
 	 * @param ds
@@ -228,9 +245,9 @@ public class DBConfig {
 //		logger.info("[C3P0_CONFIG_PATH] #"+path);
 //		System.setProperty("com.mchange.v2.c3p0.cfg.xml", path);
 
-//		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
+		ComboPooledDataSource cpds = new ComboPooledDataSource(EnvironmentCofing.environment.name());
 //		ComboPooledDataSource cpds = new ComboPooledDataSource(Environment.SERVER.name());
-		ComboPooledDataSource cpds = new ComboPooledDataSource(Environment.LOCAL.name());
+//		ComboPooledDataSource cpds = new ComboPooledDataSource(Environment.LOCAL.name());
 //				ComboPooledDataSource cpds = new ComboPooledDataSource("LOCAL");
 //		HashMap<String,DataSource> map=new HashMap<>(1);
 //		map.put(EnvironmentCofing.environment.name().toUpperCase(),cpds);
