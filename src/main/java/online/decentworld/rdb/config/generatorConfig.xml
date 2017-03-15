@@ -33,7 +33,7 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
-		<table tableName="t_activity_answer" domainObjectName="ActivityAnswer"
+		<table tableName="web_game" domainObjectName="WebGame"
 			   enableCountByExample="false" enableUpdateByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false"
 			   selectByExampleQueryId="false">

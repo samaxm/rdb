@@ -156,6 +156,14 @@ public class DBConfig {
 	}
 
 	@Bean
+	public MapperFactoryBean<WebGameMapper> getWebGameMapper(SqlSessionFactoryBean bean) throws Exception{
+		MapperFactoryBean<WebGameMapper> mapper=new MapperFactoryBean<WebGameMapper>();
+		mapper.setMapperInterface(WebGameMapper.class);
+		mapper.setSqlSessionFactory(bean.getObject());
+		return mapper;
+	}
+
+	@Bean
 	public MapperFactoryBean<TransferHistoryMapper> getTransferHistoryMapper(SqlSessionFactoryBean bean) throws Exception{
 		MapperFactoryBean<TransferHistoryMapper> mapper=new MapperFactoryBean<TransferHistoryMapper>();
 		mapper.setMapperInterface(TransferHistoryMapper.class);
